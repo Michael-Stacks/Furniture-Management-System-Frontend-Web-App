@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Employé - Gestion des Meubles</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Employé</h1>
+    <nav>
+      <ul>
+        <li><a href="#consultation">Consultation du mobilier</a></li>
+        <li><a href="#declaration">Déclaration de problème</a></li>
+        <li><a href="#demande-deplacement">Demande de déplacement</a></li>
+        <li><a href="#support">Support et assistance</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Consultation du mobilier -->
+    <section id="consultation" class="section">
+      <h2>Consultation du mobilier</h2>
+      <p>Liste des meubles assignés à votre bureau :</p>
+      <ul id="listeMeubles">
+        <li>Meuble A - Code : 001</li>
+        <li>Meuble B - Code : 002</li>
+        <!-- Exemple de données -->
+      </ul>
+      <form id="searchForm">
+        <label for="barcode">Rechercher par code barre :</label>
+        <input type="text" id="barcode" name="barcode">
+        <button type="submit">Rechercher</button>
+      </form>
+    </section>
+
+    <!-- Déclaration de problème -->
+    <section id="declaration" class="section">
+      <h2>Déclaration de problème</h2>
+      <form id="problemeForm">
+        <label for="meubleProbleme">Sélectionnez le meuble concerné :</label>
+        <select id="meubleProbleme" name="meubleProbleme" required>
+          <option value="">-- Sélectionnez --</option>
+          <option value="001">Meuble A</option>
+          <option value="002">Meuble B</option>
+        </select>
+        <label for="descriptionProbleme">Description du problème :</label>
+        <textarea id="descriptionProbleme" name="descriptionProbleme" required></textarea>
+        <button type="submit">Signaler le problème</button>
+      </form>
+      <div id="statusDemande">
+        <p>État de la demande : <span id="etatDemande">En attente</span></p>
+      </div>
+    </section>
+
+    <!-- Demande de déplacement -->
+    <section id="demande-deplacement" class="section">
+      <h2>Demande de déplacement</h2>
+      <form id="deplacementForm">
+        <label for="meubleDeplacement">Meuble à déplacer (code) :</label>
+        <input type="text" id="meubleDeplacement" name="meubleDeplacement" required>
+        <label for="bureauActuel">Bureau actuel :</label>
+        <input type="text" id="bureauActuel" name="bureauActuel" required>
+        <label for="bureauDestination">Bureau destination :</label>
+        <input type="text" id="bureauDestination" name="bureauDestination" required>
+        <button type="submit">Faire la demande</button>
+      </form>
+      <div id="statusDeplacement">
+        <p>État de la demande : <span id="etatDeplacement">En attente</span></p>
+      </div>
+    </section>
+
+    <!-- Support et assistance -->
+    <section id="support" class="section">
+      <h2>Support et assistance</h2>
+      <p>Contactez le service de gestion des meubles :</p>
+      <form id="contactForm">
+        <label for="messageSupport">Votre message :</label>
+        <textarea id="messageSupport" name="messageSupport" required></textarea>
+        <button type="submit">Envoyer</button>
+      </form>
+      <h3>FAQ - Entretien du mobilier</h3>
+      <ul>
+        <li>Comment nettoyer un meuble en bois ?</li>
+        <li>Procédure en cas de meuble endommagé</li>
+        <!-- Exemples -->
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Banque - Gestion des Meubles</p>
+  </footer>
+
+  <script>
+    // Recherche par code barre
+    document.getElementById("searchForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const barcode = document.getElementById("barcode").value;
+      if(barcode.trim() === "") {
+        alert("Veuillez entrer un code barre.");
+      } else {
+        alert("Recherche en cours pour le code : " + barcode);
+        // Ici, implémenter la recherche réelle…
+      }
+    });
+
+    // Soumission de la déclaration de problème
+    document.getElementById("problemeForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Problème signalé. Un suivi sera effectué.");
+      document.getElementById("etatDemande").textContent = "Signalé";
+      // Soumettre le formulaire au backend…
+    });
+
+    // Soumission de la demande de déplacement
+    document.getElementById("deplacementForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Demande de déplacement soumise.");
+      document.getElementById("etatDeplacement").textContent = "En cours";
+      // Soumettre le formulaire au backend…
+    });
+
+    // Soumission du formulaire de contact
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Message envoyé au service de gestion des meubles.");
+      // Soumettre le formulaire au backend…
+    });
+  </script>
+</body>
+</html>

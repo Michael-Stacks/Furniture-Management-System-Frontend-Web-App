@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Authentification - Gestion des Meubles</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="login-container">
+    <h1>Connexion</h1>
+    <form id="loginForm" action="backend_auth.php" method="POST">
+      <div class="form-group">
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" placeholder="exemple@domaine.com" required>
+        <span class="error" id="emailError"></span>
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" placeholder="Votre mot de passe" required>
+        <span class="error" id="passwordError"></span>
+      </div>
+      <div class="form-group">
+        <label for="role">Utilisateur :</label>
+        <select id="role" name="role" required>
+          <option value="">-- Choisissez un rôle --</option>
+          <option value="gestionnaire">Gestionnaire</option>
+          <option value="employe">Employé</option>
+          <option value="administrateur">Administrateur</option>
+        </select>
+        <span class="error" id="roleError"></span>
+      </div>
+      <button type="submit">Se connecter</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      // Initialisation de la validation
+      let valid = true;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const role = document.getElementById("role").value;
+
+      // Réinitialisation des messages d'erreur
+      document.getElementById("emailError").textContent = "";
+      document.getElementById("passwordError").textContent = "";
+      document.getElementById("roleError").textContent = "";
+
+      // Vérification de l'email
+      if (!email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
+        document.getElementById("emailError").textContent = "Veuillez entrer un email valide.";
+        valid = false;
+      }
+      // Vérification du mot de passe
+      if (password.trim() === "") {
+        document.getElementById("passwordError").textContent = "Le mot de passe ne peut pas être vide.";
+        valid = false;
+      }
+      // Vérification du rôle sélectionné
+      if (role === "") {
+        document.getElementById("roleError").textContent = "Veuillez sélectionner un rôle.";
+        valid = false;
+      }
+
+      if (!valid) {
+        e.preventDefault();
+        return;
+      }
+
+      // Pour la démo : redirection en fonction du rôle choisi
+      e.preventDefault(); // Empêche l’envoi effectif du formulaire
+      if(role === "gestionnaire"){
+        window.location.href = "manager.html";
+      } else if(role === "employe"){
+        window.location.href = "employee.html";
+      } else if(role === "administrateur"){
+        window.location.href = "admin.html";
+      }
+    });
+  </script>
+</body>
+</html>
